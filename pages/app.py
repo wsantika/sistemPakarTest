@@ -31,7 +31,7 @@ st.title("Dashboard Sistem Pakar")
 
 if st.button("Logout"):
     st.session_state.clear()
-    st.switch_page("login.py")
+    st.switch_page("user.py")
 
 tabs = st.tabs(["Diagnosa", "Informasi Penyakit", "Chatbot"])
 
