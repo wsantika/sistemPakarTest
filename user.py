@@ -10,9 +10,11 @@ def connect_db():
         database="sistem_pakar_pencernaan"
     )
 
+# Kembali menggunakan pengecekan berdasarkan NAMA saja
 def get_user(name):
     conn = connect_db()
-    cursor = conn.cursor(dictionary=True)
+    # Tambahkan buffered=True di sini agar tidak error saat ada data ganda
+    cursor = conn.cursor(dictionary=True, buffered=True) 
     cursor.execute("SELECT * FROM users WHERE name = %s", (name,))
     user = cursor.fetchone()
     cursor.close()
@@ -21,7 +23,7 @@ def get_user(name):
 
 def register_user(name, gender, age):
     conn = connect_db()
-    cursor = conn.cursor()
+    cursor = conn.cursor(buffered=True) # Tambahkan di sini
     cursor.execute("""
         INSERT INTO users (name, gender, age, consent)
         VALUES (%s, %s, %s, %s)
@@ -32,18 +34,29 @@ def register_user(name, gender, age):
     conn.close()
     return user_id
 
+def update_user(name, gender, age):
+    conn = connect_db()
+    cursor = conn.cursor(buffered=True) # Tambahkan di sini
+    cursor.execute("""
+        UPDATE users 
+        SET gender = %s, age = %s 
+        WHERE name = %s
+    """, (gender, age, name))
+    conn.commit()
+    cursor.close()
+    conn.close()
+
 # --- TAMPILAN ANTARMUKA (UI) ---
 st.title("Sistem Pakar Pencernaan")
 
-# Membuat 2 Tab untuk memisahkan Login dan Register
-tab_login, tab_register = st.tabs(["🔑 Login", "📝 Register"])
+tab_login, tab_register = st.tabs(["🔑 Login", "📝 Register / Update"])
 
 # --- BAGIAN LOGIN ---
 with tab_login:
     st.subheader("Masuk ke Akun Anda")
-    # Tambahkan parameter 'key' agar tidak bentrok dengan input di tab sebelah
     login_name = st.text_input("Nama", key="input_login_name")
     
+    # Kolom umur sudah dihilangkan agar login lebih simpel
     if st.button("Login", key="btn_login"):
         if not login_name:
             st.error("Nama wajib diisi!")
@@ -54,25 +67,31 @@ with tab_login:
                 st.session_state.user_id = user["id"]
                 st.switch_page("pages/app.py")
             else:
-                st.error("Akun belum terdaftar. Silakan pindah ke tab 'Register' untuk mendaftar.")
+                st.error("Akun belum terdaftar. Silakan pindah ke tab 'Register / Update' untuk mendaftar.")
 
 # --- BAGIAN REGISTER ---
 with tab_register:
-    st.subheader("Buat Akun Baru")
+    st.subheader("Buat Akun Baru / Perbarui Data")
     reg_name = st.text_input("Nama Lengkap", key="input_reg_name")
     reg_gender = st.selectbox("Jenis Kelamin", ["Laki-laki", "Perempuan"], key="input_reg_gender")
     reg_age = st.number_input("Umur", min_value=1, max_value=120, value=20, key="input_reg_age")
 
-    if st.button("Register", key="btn_register"):
+    if st.button("Simpan & Masuk", key="btn_register"):
         if not reg_name:
             st.error("Nama wajib diisi!")
         else:
-            # Cek dulu apakah nama sudah dipakai orang lain
+            # Cek apakah nama sudah ada di database
             cek_user = get_user(reg_name)
+            
             if cek_user:
-                st.warning("Nama sudah terdaftar! Silakan pindah ke tab 'Login' untuk masuk.")
+                # JIKA NAMA SUDAH ADA: Update data umurnya
+                update_user(reg_name, reg_gender, reg_age)
+                st.success(f"Data milik {reg_name} berhasil diperbarui! Mengalihkan...")
+                # Gunakan ID lama karena datanya cuma di-update
+                st.session_state.user_id = cek_user["id"] 
+                st.switch_page("pages/app.py")
             else:
-                # Jika nama belum ada, masukkan data baru ke database
+                # JIKA NAMA BELUM ADA: Bikin data baru
                 user_id = register_user(reg_name, reg_gender, reg_age)
                 st.success("Registrasi berhasil! Mengalihkan...")
                 st.session_state.user_id = user_id
