@@ -107,9 +107,9 @@ with tab_register:
     st.write("Apakah Anda memiliki kebiasaan berikut?")
     col5, col6 = st.columns(2)
     with col5:
-        is_smoking = st.checkbox("🚬 Merokok", key="chk_merokok")
+        is_smoking = st.checkbox(" Merokok", key="chk_merokok")
     with col6:
-        is_spicy = st.checkbox("🌶️ Suka Makan Pedas", key="chk_pedas")
+        is_spicy = st.checkbox(" Suka Makan Pedas", key="chk_pedas")
 
     st.write("") # Spasi kosong sebelum tombol
 

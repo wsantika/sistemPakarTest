@@ -46,6 +46,7 @@ with col_logout:
 tabs = st.tabs(["🩺 Diagnosa", "📚 Informasi Penyakit", "🤖 Chatbot"])
 
 # --- TAB 1: DIAGNOSA ---
+# --- TAB 1: DIAGNOSA ---
 with tabs[0]:
     st.subheader("Pilih Gejala yang Anda Alami")
 
@@ -69,18 +70,29 @@ with tabs[0]:
 
     st.write("")
     if st.button("Analisis Diagnosa", type="primary"):
-        input_data = np.array([selected]).astype(int)
+        
+        # --- LOGIKA BARU: CEK APAKAH ADA GEJALA YANG DIPILIH ---
+        if sum(selected) == 0: # Artinya tidak ada satupun yang dicentang (True/1)
+            st.warning("⚠️ Silakan pilih minimal satu gejala terlebih dahulu sebelum melakukan diagnosa!")
+            
+            # Hapus ingatan diagnosa sebelumnya agar Tab 2 kembali kosong
+            if "hasil_diagnosa" in st.session_state:
+                del st.session_state["hasil_diagnosa"]
+                
+        else:
+            # Jika ada gejala yang dipilih, jalankan ML seperti biasa
+            input_data = np.array([selected]).astype(int)
 
-        ml_pred = model.predict(input_data)[0]
-        ml_prob = np.max(model.predict_proba(input_data)) * 100
+            ml_pred = model.predict(input_data)[0]
+            ml_prob = np.max(model.predict_proba(input_data)) * 100
 
-        # SIMPAN HASIL DIAGNOSA KE SESSION STATE AGAR BISA DIBACA OLEH TAB 2
-        st.session_state.hasil_diagnosa = ml_pred
+            # Simpan hasil ke session state untuk Tab 2
+            st.session_state.hasil_diagnosa = ml_pred
 
-        st.success(f"**Hasil Analisis:** Anda terindikasi mengalami **{ml_pred}** dengan tingkat keyakinan **{ml_prob:.2f}%**")
-        st.info("👉 Silakan buka tab **Informasi Penyakit** di atas untuk membaca penjelasan, saran, dan cara pencegahannya.")
-
+            st.success(f"**Hasil Analisis:** Anda terindikasi mengalami **{ml_pred}** dengan tingkat keyakinan **{ml_prob:.2f}%**")
+            st.info("👉 Silakan buka tab **Informasi Penyakit** di atas untuk membaca penjelasan, saran, dan cara pencegahannya.")
 # --- TAB 2: INFORMASI PENYAKIT (FOKUS 1 PENYAKIT SAJA) ---
+
 with tabs[1]:
     st.subheader("Detail Informasi Penyakit Anda")
     
