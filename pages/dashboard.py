@@ -93,6 +93,15 @@ with tabs[0]:
     if st.button("Analisis Diagnosa", type="primary"):
         if not selected_gejala:
             st.warning("⚠️ Silakan pilih minimal 1 gejala terlebih dahulu.")
+            
+            # --- TAMBAHAN BARU: Hapus riwayat di session_state jika kosong ---
+            if "hasil_diagnosa" in st.session_state:
+                del st.session_state["hasil_diagnosa"]
+            if "nilai_cf" in st.session_state:
+                del st.session_state["nilai_cf"]
+            if "gejala_teks" in st.session_state:
+                del st.session_state["gejala_teks"]
+                
         else:
             penyakit_hasil, persentase_hasil = hitung_cf(selected_gejala)
 
@@ -100,6 +109,7 @@ with tabs[0]:
             user_id = st.session_state.user_id
             sukses_simpan = simpan_riwayat_diagnosa(user_id, penyakit_hasil, persentase_hasil, selected_gejala)
 
+            # Simpan ke memori sesi (session_state)
             st.session_state.hasil_diagnosa = penyakit_hasil
             st.session_state.nilai_cf = persentase_hasil
             st.session_state.gejala_teks = [daftar_gejala[k] for k in selected_gejala]
