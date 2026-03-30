@@ -118,7 +118,7 @@ with tab_register:
             st.error("Nama wajib diisi!")
         else:
             # --- SIMPAN DATA SEMENTARA (SESSION STATE) ---
-            # Data ini bisa dipanggil di app.py nanti meskipun tidak masuk database
+            # Data ini bisa dipanggil di dashboard.py nanti meskipun tidak masuk database
             st.session_state.tinggi_badan = reg_tb
             st.session_state.berat_badan = reg_bb
             st.session_state.merokok = is_smoking
