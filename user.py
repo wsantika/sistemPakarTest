@@ -72,7 +72,7 @@ with tab_login:
             if exact_user:
                 st.success("Login berhasil! Mengalihkan...")
                 st.session_state.user_id = exact_user["id"]
-                st.switch_page("pages/app.py")
+                st.switch_page("pages/dashboard.py")
             else:
                 name_only_user = get_user_by_name(login_name)
                 if name_only_user:
@@ -131,9 +131,9 @@ with tab_register:
                 update_user(reg_name, reg_gender, reg_age)
                 st.success(f"Data milik {reg_name} berhasil diperbarui! Mengalihkan...")
                 st.session_state.user_id = cek_user["id"] 
-                st.switch_page("pages/app.py")
+                st.switch_page("pages/dashboard.py")
             else:
                 user_id = register_user(reg_name, reg_gender, reg_age)
                 st.success("Registrasi berhasil! Mengalihkan...")
                 st.session_state.user_id = user_id
-                st.switch_page("pages/app.py")
+                st.switch_page("pages/dashboard.py")
