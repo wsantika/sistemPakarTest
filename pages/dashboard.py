@@ -1,6 +1,7 @@
 import streamlit as st
 import sys
 import os
+import google.generativeai as genai
 
 # --- MENGHUBUNGKAN KE FILE LUAR ---
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -175,11 +176,19 @@ Jawab pertanyaan pasien HANYA dalam konteks diagnosa di atas. Analisis bagaimana
             st.code(system_prompt, language="text")
 
         st.write("---")
+
+        genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+        model = genai.GenerativeModel('gemini-2.5-flash')
         
         user_question = st.chat_input("Contoh: Makanan apa yang harus saya hindari?")
         if user_question:
             st.chat_message("user").write(user_question)
             with st.chat_message("assistant"):
-                st.write("*(Integrasi API Gemini/OpenAI akan diletakkan di sini. Sistem Prompt berhasil dieksekusi!)*")
+                try:
+                    full_query = f"{system_prompt}\n\nPertanyaan Pasien: {user_question}"
+                    response = model.generate_content(full_query)
+                    st.write(response.text)
+                except Exception as e:
+                    st.error(f"Gagal memanggil Gemini: {e}")
     else:
         st.info("ℹ️ Lakukan diagnosa di Tab 1 terlebih dahulu agar Chatbot mengenali kondisimu.")
