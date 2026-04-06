@@ -148,20 +148,20 @@ with tabs[1]:
 
 # --- TAB 3: CHATBOT ---
 with tabs[2]:
-    st.subheader("Asisten Cerdas Pencernaan")
-    
+    st.subheader("🤖 Asisten Cerdas Pencernaan")
+
     if "hasil_diagnosa" in st.session_state:
-        st.write("Silakan bertanya lebih lanjut. Asisten AI ini sudah memahami konteks kondisi fisik dan diagnosa Anda.")
-        
+        st.write("Tanyakan apa saja tentang kondisimu. Chatbot ini mengingat semua percakapan dalam sesi ini.")
+
+        # Bangun konteks untuk system prompt
         tb = st.session_state.get('tinggi_badan', 165)
         bb = st.session_state.get('berat_badan', 60)
         bmi_status = "Obesitas/Overweight" if (bb / ((tb/100)**2)) >= 25 else "Normal"
-        
         gaya_hidup = []
         if st.session_state.get('merokok'): gaya_hidup.append("Merokok")
         if st.session_state.get('makan_pedas'): gaya_hidup.append("Suka Makanan Pedas/Asam")
         str_gaya_hidup = ", ".join(gaya_hidup) if gaya_hidup else "Tidak ada kebiasaan berisiko"
-        
+
         system_prompt = f"""Kamu adalah asisten medis ahli gastroenterologi. 
 BERIKUT ADALAH FAKTA MEDIS PASIEN (TIDAK BOLEH DIBANTAH):
 1. Hasil Diagnosa CF : {st.session_state.hasil_diagnosa} (Kepastian: {st.session_state.nilai_cf:.2f}%)
@@ -175,20 +175,53 @@ Jawab pertanyaan pasien HANYA dalam konteks diagnosa di atas. Analisis bagaimana
         with st.expander("🔍 Lihat System Prompt (Arsitektur Guardrails)"):
             st.code(system_prompt, language="text")
 
+        # Tombol bersihkan chat (pakai key unik per diagnosa agar tidak bentrok)
+        chat_key = f"chat_history_{st.session_state.hasil_diagnosa}"
+        if chat_key not in st.session_state:
+            st.session_state[chat_key] = []
+
+        col_spacer, col_clear = st.columns([5, 1])
+        with col_clear:
+            if st.button("🗑️ Bersihkan", key="btn_clear_chat"):
+                st.session_state[chat_key] = []
+                st.rerun()
+
         st.write("---")
 
-        genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-        model = genai.GenerativeModel('gemini-2.5-flash')
-        
+        # Tampilkan semua riwayat percakapan
+        for pesan in st.session_state[chat_key]:
+            with st.chat_message(pesan["role"]):
+                st.markdown(pesan["content"])
+
+        # Input pesan baru
         user_question = st.chat_input("Contoh: Makanan apa yang harus saya hindari?")
         if user_question:
-            st.chat_message("user").write(user_question)
+            # Simpan & tampilkan pesan user
+            st.session_state[chat_key].append({"role": "user", "content": user_question})
+            with st.chat_message("user"):
+                st.markdown(user_question)
+
+            # Kirim seluruh riwayat ke Gemini sebagai multi-turn chat
             with st.chat_message("assistant"):
                 try:
-                    full_query = f"{system_prompt}\n\nPertanyaan Pasien: {user_question}"
-                    response = model.generate_content(full_query)
-                    st.write(response.text)
+                    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+                    model = genai.GenerativeModel(
+                        model_name='gemini-2.5-flash',
+                        system_instruction=system_prompt
+                    )
+                    # Bangun history Gemini dari semua pesan lama (kecuali pesan terakhir yg baru masuk)
+                    # PENTING: Gemini pakai role "model" bukan "assistant"
+                    history_gemini = [
+                        {"role": "model" if p["role"] == "assistant" else "user", "parts": [p["content"]]}
+                        for p in st.session_state[chat_key][:-1]  # semua kecuali pesan user terakhir
+                    ]
+                    chat_session = model.start_chat(history=history_gemini)
+                    response = chat_session.send_message(user_question)
+                    reply = response.text
+                    st.markdown(reply)
+                    # Simpan balasan asisten ke riwayat
+                    st.session_state[chat_key].append({"role": "assistant", "content": reply})
                 except Exception as e:
-                    st.error(f"Gagal memanggil Gemini: {e}")
+                    st.error(f"❌ Gagal memanggil Gemini API: {e}")
     else:
         st.info("ℹ️ Lakukan diagnosa di Tab 1 terlebih dahulu agar Chatbot mengenali kondisimu.")
