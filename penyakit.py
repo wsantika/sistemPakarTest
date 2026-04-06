@@ -1,29 +1,37 @@
-# File: penyakit.py
 
 info_penyakit = {
     "GERD": {
-        "deskripsi": "GERD (Gastroesophageal Reflux Disease) adalah kondisi naiknya asam lambung ke kerongkongan yang menyebabkan rasa terbakar di dada (heartburn).",
-        "saran": "Jangan langsung berbaring setelah makan (beri jeda minimal 2-3 jam). Tidur dengan bantal lebih tinggi dari badan.",
-        "pencegahan": "Jaga berat badan ideal, hindari makan dalam porsi sangat besar sekaligus, dan kurangi makanan pedas/asam."
+        "deskripsi": "Gastroesophageal Reflux Disease (GERD) adalah kondisi patologis atau gangguan pencernaan kronis di mana asam lambung dan isi lambung naik kembali ke esofagus (kerongkongan). Hal ini terjadi akibat melemahnya katup Lower Esophageal Sphincter (LES). Kondisi ini menimbulkan gejala khas seperti rasa panas atau terbakar di dada (heartburn), regurgitasi, nyeri dada yang kadang mirip serangan jantung, hingga batuk kronis dan ketidaknyamanan saat malam hari.",
+        "saran": "Pengobatan GERD dapat dilakukan dengan terapi farmakologis, di mana penggunaan obat golongan Proton Pump Inhibitor (PPI) sering dijadikan sebagai terapi lini pertama. Karena gejalanya bisa menyerupai penyakit jantung, sangat penting untuk berkonsultasi dengan dokter. Selain itu, perbaiki pola tidur karena gangguan tidur dan GERD memiliki hubungan dua arah yang saling memperparah.",
+        "pencegahan": "Kunci utama pencegahannya adalah modifikasi gaya hidup. Jaga berat badan ideal atau indeks massa tubuh (BMI) normal. Hindari faktor pemicu seperti makanan pedas, berlemak, kafein, dan alkohol. Berhenti merokok, kelola tingkat stres dengan baik, serta hindari langsung berbaring setelah makan.",
+        "referensi": "[1] Sangging, P. R. A., dkk. (2025). Penyakit GERD. MEDIC NUTRICIA: Jurnal Ilmu Kesehatan, Vol. 16 No. 2.\n[2] Putri, A. K. Z., dkk. (2023). Modifikasi Gaya Hidup Dan Kajian Pengobatan Pada Penderita Gastroesophageal Reflux Disease (GERD). Scientific Journal of Nursing.\n[3] Rahmadani, T. S., dkk. (2026). Hubungan Dua Arah Antara Gastroesophageal Reflux Disease dengan Gangguan Tidur. Medula, Vol. 16, No. 1.\n[4] Indriastuti, D., dkk. (2024). Penyuluhan Kesehatan Mengenai Pengenalan Gangguan Kesehatan Pencernaan: Gastroesophageal Reflux Disease (GERD) Dan Penanganannya. Karya Kesehatan Journal of Community Engagement, Vol. 05, No. 02.\n[5] Kuncoro, D., dkk. (2024). Jaringan Syaraf Tiruan Memprediksi Penyakit Gerd. Bridge: Jurnal Publikasi Sistem Informasi dan Telekomunikasi, Vol. 2 No. 4."
     },
+    
     "Gastritis": {
-        "deskripsi": "Gastritis atau Maag adalah peradangan pada dinding lambung. Kondisi ini menyebabkan nyeri ulu hati, kembung, dan rasa tidak nyaman di perut atas.",
-        "saran": "Hindari makanan pedas, asam, dan berlemak. Makanlah dengan porsi kecil tapi sering.",
-        "pencegahan": "Biasakan makan tepat waktu, kelola stres, dan batasi konsumsi kafein."
+        "deskripsi": "Gastritis adalah penyakit lambung yang terjadi akibat peradangan atau pembengkakan pada area mukosa lambung yang memicu kenaikan asam lambung. Gejalanya biasanya berupa rasa tidak nyaman pada perut bagian atas (ulu hati), mual, muntah, hingga sakit kepala dan menurunnya nafsu makan.",
+        "saran": "Atur pola makan yang baik dan kelola stres dengan bijak, karena stres yang tinggi dapat memicu kekambuhan gastritis. Jika melakukan pengobatan secara mandiri (swamedikasi) untuk meredakan gejala, pastikan menggunakan obat yang tepat sesuai anjuran medis agar tidak memperparah kondisi lambung.",
+        "pencegahan": "Pencegahan utama adalah dengan menjaga keteraturan jam makan dan tidak menunda waktu makan. Hindari kebiasaan mengonsumsi makanan yang merangsang asam lambung secara berlebihan, seperti makanan yang terlalu pedas, asam, serta terapkan gaya hidup yang sehat.",
+        "referensi": "[1] Pratama, P. H., dkk. (2022). Pengaruh Perbedaan Pola Makan Terhadap Penyebab Penyakit Gastritis Pada Remaja.\n[2] Pusfitasari, N., dkk. (2024). Types Of Food That Cause Gastritis. HN HealthCare Nursing Journal, Vol. 6 No. 2.\n[3] Zuhair, R. D., dkk. (2023). Hubungan Antara Pola Makan Dan Stres Terhadap Kejadian Penyakit Gastritis. Cendekia Utama, Vol. 12 No. 2.\n[4] Octasari, P. M., & Shinta, F. D. (2022). Gambaran Tingkat Pengetahuan Dan Perilaku Masyarakat Terhadap Swamedikasi Penyakit Gastritis. Jurnal Ilmiah Manuntung, 8(2)."
     },
+    
     "Apendisitis": {
-        "deskripsi": "Apendisitis adalah peradangan pada usus buntu (appendix) yang sering ditandai dengan nyeri tajam di perut kanan bawah.",
-        "saran": "Kondisi ini merupakan indikasi gawat darurat. SEGERA kunjungi IGD rumah sakit terdekat untuk penanganan medis lanjutan.",
-        "pencegahan": "Perbanyak konsumsi makanan berserat untuk mencegah penumpukan feses yang dapat menyumbat usus buntu."
+        "deskripsi": "Apendisitis secara umum adalah peradangan akibat infeksi pada usus buntu atau umbai cacing (apendiks). Gejala penyakit usus buntu umumnya berupa nyeri pada perut kanan bawah, demam, hingga mual dan muntah. Dari berbagai penelitian yang telah dilakukan, obstruksi merupakan penyebab yang dominan dan merupakan pencetus untuk terjadinya apendisitis.",
+        "saran": "Jika sudah terjadi peradangan, tindakan yang biasanya dilakukan adalah dengan operasi pengangkatan usus buntu. Setelah operasi, pasien perlu melakukan penyesuaian pola makan sebelum kembali ke pola makan normal. Semakin positif sikap pasien dalam menghadapi pengelolaan apendisitis, maka semakin baik praktik pasien dalam mencegah komplikasi lebih serius.",
+        "pencegahan": "Hindari faktor risiko potensial seperti diet rendah serat dan tinggi gula. Sangat penting untuk mengkonsumsi makanan yang mengandung serat secara rutin agar mudah dicerna oleh sistem pencernaan, serta menghindari makanan yang terlalu pedas.",
+        "referensi": "[1] Apriliani, E., Zaini, S., & Kapadia, R. (2022). Hubungan Tingkat Pengetahuan Terhadap Kepatuhan Diit Pada Pasien Apendisitis di Poli Bedah RSUD dr. Abdul Azis Singkawang Tahun 2019. Scientific Journal of Nursing Research, Vol 4 No 2, hlm. 63-67."
     },
+    
     "Disentri": {
-        "deskripsi": "Disentri adalah peradangan usus yang menyebabkan diare disertai darah atau lendir. Biasanya disebabkan oleh infeksi bakteri atau ameba.",
-        "saran": "Segera periksakan ke dokter karena Anda mungkin memerlukan antibiotik. Jaga hidrasi dengan minum banyak cairan dan oralit.",
-        "pencegahan": "Cuci tangan dengan sabun setelah dari toilet, pastikan makanan dan air minum higienis."
+        "deskripsi": "Disentri adalah infeksi yang menimbulkan luka dan tukak yang terbatas pada kolon (usus besar). Penyakit ini ditandai dengan gejala khas yang dikenal sebagai sindrom disentri, yaitu sakit perut yang sering disertai tenesmus (rasa tidak tuntas/nyeri saat BAB), serta tinja yang mengandung darah dan lendir yang umumnya berasal dari bakteri seperti Shigella dysenteriae.",
+        "saran": "Pengobatan utama untuk disentri adalah dengan penggunaan antibiotik untuk membunuh bakteri penyebabnya. Namun, sangat penting untuk berkonsultasi dengan dokter karena penggunaan jenis antibiotik, dosis, dan interval yang tidak tepat dapat menyebabkan kekambuhan (relaps), resistensi kuman, hingga masalah efek samping.",
+        "pencegahan": "Bakteri penyebab disentri sangat mudah ditularkan melalui jalur feses-oral atau melalui konsumsi makanan dan air yang terkontaminasi. Jaga kebersihan diri dan lingkungan secara ketat. Khusus untuk balita dan anak-anak, pastikan asupan gizi yang baik dan pemberian ASI eksklusif untuk memperkuat daya tahan tubuh agar tidak rentan terhadap bakteri.",
+        "referensi": "[1] Saputri, G. A. R., dkk. (2023). Penyuluhan Kenali Gejala Dan Cara Penanganan Disentri Pada Sekolah Di SMA Negeri 17 Bandar Lampung. Jurnal Pengabdian Farmasi Malahayati, Vol. 6 No.1.\n[2] Irawan, J., dkk. (2021). Disentri Basiler. Jurnal Medula, Volume 11, Nomor 3.\n[3] Monikawati, T., dkk. Hubungan Ketepatan Penggunaan Antibiotik Dengan Kekambuhan Disentri Pada Pasien Rawat Jalan.\n[4] Kantona, E., dkk. (2024). Faktor Penyebab Kejadian Anak Disentri. Plenary Health: Jurnal Kesehatan Paripurna, Vol. 1 Issue 1."
     },
+    
     "Diare": {
-        "deskripsi": "Diare adalah kondisi buang air besar dengan tekstur cair (lebih dari 3 kali sehari) tanpa disertai darah, sering kali akibat keracunan makanan ringan atau virus.",
-        "saran": "Perbanyak minum cairan (air putih, oralit) untuk mencegah dehidrasi. Hindari susu dan makanan pedas sementara waktu.",
-        "pencegahan": "Rajin cuci tangan pakai sabun, pastikan kebersihan makanan, dan hindari jajan sembarangan."
+        "deskripsi": "Diare didefinisikan sebagai feses (BAB) yang konsistensinya lunak hingga cair dan terjadi lebih dari tiga kali per hari. Kondisi ini ditandai dengan frekuensi dan konsistensi tinja yang tidak normal. Cara penularan diare pada umumnya melalui cara fekal oral yaitu melalui makanan atau minuman yang tercemar, atau kontak langsung tangan yang telah tercemar tinja penderita.",
+        "saran": "Terapi rehidrasi merupakan aspek penting dari pengelolaan setiap pasien dengan diare. Sebagian besar bersifat self limiting sehingga hanya perlu diperhatikan keseimbangan cairan dan elektrolit. Dalam kasus diare akut ringan, istirahat, hidrasi yang cukup, dan makanan yang mudah dicerna sering cukup untuk memulihkan diri. Jika diare berlangsung lebih dari beberapa hari atau disertai gejala yang parah, penting untuk mencari perawatan medis.",
+        "pencegahan": "Pencegahan utama adalah menerapkan Perilaku Hidup Bersih dan Sehat (PHBS). Sangat penting untuk mencuci tangan pakai sabun terutama sebelum makan, sesudah makan, dan sesudah buang air. Gunakan air bersih yang terlindung dari kontaminasi dan konsumsi air yang aman. Hindari makanan yang berisiko menyebabkan diare, seperti makanan mentah atau setengah matang.",
+        "referensi": "[1] Eldysta, E., dkk. (2022). Hubungan Perilaku Cuci Tangan Dan Faktor Risiko Lingkungan Terhadap Kejadian Penyakit Diare. Public Health and Safety International Journal, Vol. 2, No. 2.\n[2] Aisyah, I. S. (2024). Analisis Hubungan Antara Praktik Higienis dan Kejadian Penyakit Diare: Kasus Dusun Jagabaya. Jurnal Kesehatan dan Kebidanan Nusantara, Vol. 2, No. 1.\n[3] Siregar, P. A., dkk. (2023). Epidemiologi Penyakit Diare. JK: Jurnal Kesehatan, Vol. 1, No. 1.\n[4] Iqbal, A. F., dkk. (2022). Pengaruh Perilaku Hidup Bersih Dan Sehat Terhadap Kejadian Diare Pada Anak Sekolah. Jurnal Medical Profession (MedPro), Vol. 4, No. 3."
     }
 }

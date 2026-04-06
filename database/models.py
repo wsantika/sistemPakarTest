@@ -86,22 +86,24 @@ def get_semua_gejala():
     return {row['kode_gejala']: row['nama_gejala'] for row in results}
 
 def get_info_penyakit():
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT nama_penyakit, deskripsi, saran, pencegahan FROM penyakit")
-    results = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    # Ubah menjadi nested dictionary
+    db = get_connection()  # ← isi ini
+    cursor = db.cursor(dictionary=True)
+    
+    cursor.execute("SELECT nama_penyakit, deskripsi, saran, pencegahan, referensi FROM penyakit")
+    data = cursor.fetchall()
+    
     info = {}
-    for row in results:
+    for row in data:
         info[row['nama_penyakit']] = {
             "deskripsi": row['deskripsi'],
             "saran": row['saran'],
-            "pencegahan": row['pencegahan']
+            "pencegahan": row['pencegahan'],
+            "referensi": row['referensi']
         }
+        
+    cursor.close()
+    db.close()
     return info
-
 def get_rules_cf():
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)

@@ -42,7 +42,8 @@ def migrate():
                 nama_penyakit VARCHAR(100) NOT NULL,
                 deskripsi TEXT,
                 saran TEXT,
-                pencegahan TEXT
+                pencegahan TEXT,
+                referensi TEXT
             )
         """,
         "gejala": """

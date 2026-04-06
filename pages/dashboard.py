@@ -132,8 +132,10 @@ with tabs[1]:
     st.subheader("Detail Informasi Penyakit Anda")
     if "hasil_diagnosa" in st.session_state:
         penyakit_user = st.session_state.hasil_diagnosa
-        if penyakit_user in info_penyakit:
-            detail = info_penyakit[penyakit_user]
+        info_penyakit_db = get_info_penyakit() # Memanggil data dari database
+        
+        if penyakit_user in info_penyakit_db:
+            detail = info_penyakit_db[penyakit_user]
             
             st.markdown(f"### 🩺 {penyakit_user} (Kepastian: {st.session_state.nilai_cf:.2f}%)")
             st.write("---")
@@ -143,6 +145,13 @@ with tabs[1]:
             st.warning(detail["saran"])
             st.write("**🛡️ Cara Mencegah:**")
             st.success(detail["pencegahan"])
+            
+            # 👇 TAMBAHKAN KODINGAN INI UNTUK DAFTAR PUSTAKA 👇
+            st.write("") # Memberi sedikit jarak
+            if "referensi" in detail and detail["referensi"]:
+                with st.expander("📚 Lihat Sumber Literatur"):
+                    st.markdown(detail["referensi"])
+                    
     else:
         st.info("ℹ️ Anda belum melakukan diagnosa di Tab 1.")
 
