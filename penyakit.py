@@ -20,7 +20,7 @@ info_penyakit = {
         "pencegahan": "Hindari faktor risiko potensial seperti diet rendah serat dan tinggi gula. Sangat penting untuk mengkonsumsi makanan yang mengandung serat secara rutin agar mudah dicerna oleh sistem pencernaan, serta menghindari makanan yang terlalu pedas.",
         "referensi": "[1] Apriliani, E., Zaini, S., & Kapadia, R. (2022). Hubungan Tingkat Pengetahuan Terhadap Kepatuhan Diit Pada Pasien Apendisitis di Poli Bedah RSUD dr. Abdul Azis Singkawang Tahun 2019. Scientific Journal of Nursing Research, Vol 4 No 2, hlm. 63-67.\n[2] Pratama, Y., dkk. (2021). Aspek Klinis dan Tatalaksana Apendisitis Akut pada Anak. Jurnal Kedokteran Nanggroe Medika, 4(2).\n[3] Sani, N., dkk. (2020). Karakteristik Pasien Apendisitis Akut di Rumah Sakit Umum Daerah Dr. H. Abdul Moeloek Provinsi Lampung. Jurnal Ilmu Keperawatan Malahayati, 2(4).\n[4] Hartawan, I. G. N., dkk. (2020). Karakteristik Kasus Apendisitis Di Rumah Sakit Umum Pusat Sanglah Denpasar Bali. E-Jurnal Medika Udayana, 9(10)."
     },
-    
+
     "Disentri": {
         "deskripsi": "Disentri adalah infeksi yang menimbulkan luka dan tukak yang terbatas pada kolon (usus besar). Penyakit ini ditandai dengan gejala khas yang dikenal sebagai sindrom disentri, yaitu sakit perut yang sering disertai tenesmus (rasa tidak tuntas/nyeri saat BAB), serta tinja yang mengandung darah dan lendir yang umumnya berasal dari bakteri seperti Shigella dysenteriae.",
         "saran": "Pengobatan utama untuk disentri adalah dengan penggunaan antibiotik untuk membunuh bakteri penyebabnya. Namun, sangat penting untuk berkonsultasi dengan dokter karena penggunaan jenis antibiotik, dosis, dan interval yang tidak tepat dapat menyebabkan kekambuhan (relaps), resistensi kuman, hingga masalah efek samping.",
