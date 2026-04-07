@@ -65,7 +65,7 @@ cd sp-masalahpencernaan
 Install seluruh dependensi yang dibutuhkan oleh aplikasi:
 
 ```bash
-pip install streamlit mysql-connector-python python-dotenv numpy pandas
+pip pip install streamlit mysql-connector-python python-dotenv google-generativeai
 ```
 
 ### 3. Konfigurasi Environment (`.env`)
