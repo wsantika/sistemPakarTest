@@ -43,14 +43,17 @@ Sebelum menjalankan proyek ini, pastikan komputer Anda telah menginstal perangka
 
 - **Python** (Versi 3.8 atau lebih baru)
 - **MySQL Server** (Bisa menggunakan XAMPP, MAMP, atau Laragon)
+- **Google Gemini API Key** (Dapatkan secara gratis di Google AI Studio)
 
 ---
 
 ## 🚀 Panduan Instalasi & Setup
 
+Ikuti langkah-langkah di bawah ini untuk menjalankan aplikasi secara lokal di komputer Anda dari nol:
+
 ### 1. Clone atau Unduh Repositori
 
-Buka terminal/Command Prompt, lalu arahkan ke direktori tempat Anda ingin menyimpan proyek ini.
+Buka terminal/ Command Prompt, lalu arahkan ke direktori tempat Anda ingin menyimpan proyek ini.
 
 ```bash
 git clone https://github.com/wsantika/sp-masalahpencernaan.git
@@ -59,7 +62,7 @@ cd sp-masalahpencernaan
 
 ### 2. Instalasi Library Python
 
-Instal seluruh dependensi yang dibutuhkan oleh aplikasi:
+Install seluruh dependensi yang dibutuhkan oleh aplikasi:
 
 ```bash
 pip install streamlit mysql-connector-python python-dotenv numpy pandas
@@ -74,6 +77,7 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASS=
 DB_NAME=sistem_pakar_pencernaan
+GEMINI_API_KEY="masukkan_api_key_gemini_anda_disini"
 ```
 
 > **Catatan:** Kosongkan `DB_PASS` jika Anda menggunakan XAMPP versi default.
@@ -113,4 +117,4 @@ Aplikasi akan secara otomatis terbuka di browser default Anda (biasanya di `http
 1. **Daftar/Masuk:** Buka tab Register untuk membuat akun baru. Isi data diri beserta parameter opsional tinggi/berat badan dan gaya hidup.
 2. **Pilih Gejala:** Masuk ke tab **Diagnosa**, centang gejala-gejala klinis yang saat ini sedang dirasakan, lalu klik "Analisis Diagnosa".
 3. **Baca Literatur:** Buka tab **Informasi Penyakit** untuk membaca detail penyakit, penanganan, pencegahan, dan daftar pustaka jurnal rujukannya.
-4. **Tanya Chatbot:** Buka tab **Chatbot** untuk berkonsultasi lebih lanjut dengan Asisten AI terkait hasil diagnosa tersebut.
+4. **Tanya Chatbot:** Buka tab Chatbot untuk berkonsultasi lebih lanjut dengan Asisten AI terkait hasil diagnosa. (Pastikan koneksi internet aktif agar API Gemini dapat merespons dengan baik).
