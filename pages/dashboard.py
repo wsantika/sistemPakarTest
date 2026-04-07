@@ -23,7 +23,6 @@ if "user_id" not in st.session_state:
 def load_knowledge_base():
     return get_semua_gejala(), get_info_penyakit(), get_rules_cf()
 
-# Panggil fungsinya, data sekarang berasal murni dari MySQL
 daftar_gejala, info_penyakit, rules_cf = load_knowledge_base()
 
 # --- FUNGSI ALGORITMA CERTAINTY FACTOR ---
@@ -36,7 +35,6 @@ def hitung_cf(gejala_terpilih):
     is_merokok = st.session_state.get('merokok', False)
     is_pedas = st.session_state.get('makan_pedas', False)
 
-    # Injeksi Gaya Hidup (dengan pengecekan nama penyakit untuk keamanan)
     if bmi >= 25.0 and "GERD" in cf_gabungan: 
         cf_gabungan["GERD"] = cf_gabungan["GERD"] + 0.20 * (1 - cf_gabungan["GERD"])
     if is_merokok and "GERD" in cf_gabungan:
@@ -47,7 +45,6 @@ def hitung_cf(gejala_terpilih):
         if "Diare" in cf_gabungan:
             cf_gabungan["Diare"] = cf_gabungan["Diare"] + 0.15 * (1 - cf_gabungan["Diare"])
 
-    # Kalkulasi Gejala
     for penyakit, rules_pakar in rules_cf.items():
         for kode_gejala in gejala_terpilih:
             if kode_gejala in rules_pakar:
@@ -90,10 +87,6 @@ with tabs[0]:
                 if st.checkbox(nama_gejala, key=kode):
                     selected_gejala.append(kode)
 
-    # =================================================================
-    # LOGIKA BARU: PENGHAPUSAN OTOMATIS (Berjalan real-time)
-    # Jika daftar gejala kosong (user meng-uncheck semua), langsung hapus memori
-    # =================================================================
     if not selected_gejala:
         if "hasil_diagnosa" in st.session_state:
             del st.session_state["hasil_diagnosa"]
@@ -104,14 +97,28 @@ with tabs[0]:
 
     st.write("")
     
-    # Tombol sekarang hanya fokus untuk memproses diagnosa saja
-    if st.button("Analisis Diagnosa", type="primary"):
+    # --- POSISI TOMBOL BAWAH ---
+    col_kiri, col_tengah, col_kanan = st.columns([2, 4, 3])
+    
+    with col_kiri:
+        # Menyimpan status klik ke variabel klik_analisis
+        klik_analisis = st.button("Analisis Diagnosa", type="primary", key="btn_analisis_final")
+
+    with col_kanan:
+        if selected_gejala:
+            def bersihkan_centang():
+                for kode in daftar_gejala.keys():
+                    if kode in st.session_state:
+                        st.session_state[kode] = False 
+            st.button("🗑️ Hapus Semua Pilihan", on_click=bersihkan_centang, key="btn_hapus_pilihan")
+
+    # --- TAMPILAN HASIL DIAGNOSA (SEKARANG MEMANJANG/FULL WIDTH) ---
+    if klik_analisis:
         if not selected_gejala:
             st.warning("⚠️ Silakan pilih minimal 1 gejala terlebih dahulu.")
         else:
             penyakit_hasil, persentase_hasil = hitung_cf(selected_gejala)
 
-            # --- SIMPAN KE DATABASE ---
             user_id = st.session_state.user_id
             sukses_simpan = simpan_riwayat_diagnosa(user_id, penyakit_hasil, persentase_hasil, selected_gejala)
 
@@ -119,6 +126,7 @@ with tabs[0]:
             st.session_state.nilai_cf = persentase_hasil
             st.session_state.gejala_teks = [daftar_gejala[k] for k in selected_gejala]
 
+            # Karena bagian ini di luar "with col_kiri", maka kotaknya akan penuh memanjang
             st.success(f"**Hasil Analisis:** Anda terindikasi mengalami **{penyakit_hasil}** dengan tingkat keyakinan **{persentase_hasil:.2f}%**")
             st.info("👉 Silakan buka tab **Informasi Penyakit** dan **Chatbot** di atas untuk pendalaman lebih lanjut.")
             
@@ -132,7 +140,7 @@ with tabs[1]:
     st.subheader("Detail Informasi Penyakit Anda")
     if "hasil_diagnosa" in st.session_state:
         penyakit_user = st.session_state.hasil_diagnosa
-        info_penyakit_db = get_info_penyakit() # Memanggil data dari database
+        info_penyakit_db = get_info_penyakit() 
         
         if penyakit_user in info_penyakit_db:
             detail = info_penyakit_db[penyakit_user]
@@ -146,8 +154,7 @@ with tabs[1]:
             st.write("**🛡️ Cara Mencegah:**")
             st.success(detail["pencegahan"])
             
-            # 👇 TAMBAHKAN KODINGAN INI UNTUK DAFTAR PUSTAKA 👇
-            st.write("") # Memberi sedikit jarak
+            st.write("") 
             if "referensi" in detail and detail["referensi"]:
                 with st.expander("📚 Lihat Sumber Literatur"):
                     st.markdown(detail["referensi"])
@@ -162,7 +169,6 @@ with tabs[2]:
     if "hasil_diagnosa" in st.session_state:
         st.write("Tanyakan apa saja tentang kondisimu. Chatbot ini mengingat semua percakapan dalam sesi ini.")
 
-        # Bangun konteks untuk system prompt
         tb = st.session_state.get('tinggi_badan', 165)
         bb = st.session_state.get('berat_badan', 60)
         bmi_status = "Obesitas/Overweight" if (bb / ((tb/100)**2)) >= 25 else "Normal"
@@ -184,7 +190,6 @@ Jawab pertanyaan pasien HANYA dalam konteks diagnosa di atas. Analisis bagaimana
         with st.expander("🔍 Lihat System Prompt (Arsitektur Guardrails)"):
             st.code(system_prompt, language="text")
 
-        # Tombol bersihkan chat (pakai key unik per diagnosa agar tidak bentrok)
         chat_key = f"chat_history_{st.session_state.hasil_diagnosa}"
         if chat_key not in st.session_state:
             st.session_state[chat_key] = []
@@ -197,20 +202,16 @@ Jawab pertanyaan pasien HANYA dalam konteks diagnosa di atas. Analisis bagaimana
 
         st.write("---")
 
-        # Tampilkan semua riwayat percakapan
         for pesan in st.session_state[chat_key]:
             with st.chat_message(pesan["role"]):
                 st.markdown(pesan["content"])
 
-        # Input pesan baru
         user_question = st.chat_input("Contoh: Makanan apa yang harus saya hindari?")
         if user_question:
-            # Simpan & tampilkan pesan user
             st.session_state[chat_key].append({"role": "user", "content": user_question})
             with st.chat_message("user"):
                 st.markdown(user_question)
 
-            # Kirim seluruh riwayat ke Gemini sebagai multi-turn chat
             with st.chat_message("assistant"):
                 try:
                     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -218,17 +219,14 @@ Jawab pertanyaan pasien HANYA dalam konteks diagnosa di atas. Analisis bagaimana
                         model_name='gemini-2.5-flash',
                         system_instruction=system_prompt
                     )
-                    # Bangun history Gemini dari semua pesan lama (kecuali pesan terakhir yg baru masuk)
-                    # PENTING: Gemini pakai role "model" bukan "assistant"
                     history_gemini = [
                         {"role": "model" if p["role"] == "assistant" else "user", "parts": [p["content"]]}
-                        for p in st.session_state[chat_key][:-1]  # semua kecuali pesan user terakhir
+                        for p in st.session_state[chat_key][:-1] 
                     ]
                     chat_session = model.start_chat(history=history_gemini)
                     response = chat_session.send_message(user_question)
                     reply = response.text
                     st.markdown(reply)
-                    # Simpan balasan asisten ke riwayat
                     st.session_state[chat_key].append({"role": "assistant", "content": reply})
                 except Exception as e:
                     st.error(f"❌ Gagal memanggil Gemini API: {e}")
