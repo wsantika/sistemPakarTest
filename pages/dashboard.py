@@ -35,16 +35,20 @@ def hitung_cf(gejala_terpilih):
     is_merokok = st.session_state.get('merokok', False)
     is_pedas = st.session_state.get('makan_pedas', False)
 
-    if bmi >= 25.0 and "GERD" in cf_gabungan: 
-        cf_gabungan["GERD"] = cf_gabungan["GERD"] + 0.20 * (1 - cf_gabungan["GERD"])
-    if is_merokok and "GERD" in cf_gabungan:
-        cf_gabungan["GERD"] = cf_gabungan["GERD"] + 0.15 * (1 - cf_gabungan["GERD"])
+    # --- PENYESUAIAN NAMA PENYAKIT BERDASARKAN JURNAL TERBARU ---
+    if bmi >= 25.0 and "Refluks (GERD)" in cf_gabungan: 
+        cf_gabungan["Refluks (GERD)"] = cf_gabungan["Refluks (GERD)"] + 0.20 * (1 - cf_gabungan["Refluks (GERD)"])
+    
+    if is_merokok and "Refluks (GERD)" in cf_gabungan:
+        cf_gabungan["Refluks (GERD)"] = cf_gabungan["Refluks (GERD)"] + 0.15 * (1 - cf_gabungan["Refluks (GERD)"])
+    
     if is_pedas:
-        if "Gastritis" in cf_gabungan:
-            cf_gabungan["Gastritis"] = cf_gabungan["Gastritis"] + 0.25 * (1 - cf_gabungan["Gastritis"])
-        if "Diare" in cf_gabungan:
-            cf_gabungan["Diare"] = cf_gabungan["Diare"] + 0.15 * (1 - cf_gabungan["Diare"])
+        if "Maag (Dispepsia)" in cf_gabungan:
+            cf_gabungan["Maag (Dispepsia)"] = cf_gabungan["Maag (Dispepsia)"] + 0.25 * (1 - cf_gabungan["Maag (Dispepsia)"])
+        if "Gangguan Pencernaan (Disentry)" in cf_gabungan:
+            cf_gabungan["Gangguan Pencernaan (Disentry)"] = cf_gabungan["Gangguan Pencernaan (Disentry)"] + 0.15 * (1 - cf_gabungan["Gangguan Pencernaan (Disentry)"])
 
+    # --- PERHITUNGAN CF PAKAR KOMBINASI ---
     for penyakit, rules_pakar in rules_cf.items():
         for kode_gejala in gejala_terpilih:
             if kode_gejala in rules_pakar:
@@ -52,6 +56,7 @@ def hitung_cf(gejala_terpilih):
                 cf_lama = cf_gabungan[penyakit]
                 cf_gabungan[penyakit] = cf_lama + cf_gejala * (1 - cf_lama)
 
+    # Mencari penyakit dengan nilai CF tertinggi
     penyakit_tertinggi = max(cf_gabungan, key=cf_gabungan.get)
     persentase_tertinggi = cf_gabungan[penyakit_tertinggi] * 100
 
@@ -87,6 +92,7 @@ with tabs[0]:
                 if st.checkbox(nama_gejala, key=kode):
                     selected_gejala.append(kode)
 
+    # Bersihkan state jika tidak ada gejala terpilih
     if not selected_gejala:
         if "hasil_diagnosa" in st.session_state:
             del st.session_state["hasil_diagnosa"]
@@ -101,7 +107,6 @@ with tabs[0]:
     col_kiri, col_tengah, col_kanan = st.columns([2, 4, 3])
     
     with col_kiri:
-        # Menyimpan status klik ke variabel klik_analisis
         klik_analisis = st.button("Analisis Diagnosa", type="primary", key="btn_analisis_final")
 
     with col_kanan:
@@ -112,7 +117,7 @@ with tabs[0]:
                         st.session_state[kode] = False 
             st.button("🗑️ Hapus Semua Pilihan", on_click=bersihkan_centang, key="btn_hapus_pilihan")
 
-    # --- TAMPILAN HASIL DIAGNOSA (SEKARANG MEMANJANG/FULL WIDTH) ---
+    # --- TAMPILAN HASIL DIAGNOSA ---
     if klik_analisis:
         if not selected_gejala:
             st.warning("⚠️ Silakan pilih minimal 1 gejala terlebih dahulu.")
@@ -126,7 +131,6 @@ with tabs[0]:
             st.session_state.nilai_cf = persentase_hasil
             st.session_state.gejala_teks = [daftar_gejala[k] for k in selected_gejala]
 
-            # Karena bagian ini di luar "with col_kiri", maka kotaknya akan penuh memanjang
             st.success(f"**Hasil Analisis:** Anda terindikasi mengalami **{penyakit_hasil}** dengan tingkat keyakinan **{persentase_hasil:.2f}%**")
             st.info("👉 Silakan buka tab **Informasi Penyakit** dan **Chatbot** di atas untuk pendalaman lebih lanjut.")
             
@@ -159,6 +163,8 @@ with tabs[1]:
                 with st.expander("📚 Lihat Sumber Literatur"):
                     st.markdown(detail["referensi"])
                     
+        else:
+            st.warning(f"Informasi detail untuk penyakit '{penyakit_user}' belum tersedia.")
     else:
         st.info("ℹ️ Anda belum melakukan diagnosa di Tab 1.")
 

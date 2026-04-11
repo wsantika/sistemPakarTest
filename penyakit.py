@@ -1,37 +1,38 @@
-
 info_penyakit = {
-    "GERD": {
-        "deskripsi": "Gastroesophageal Reflux Disease (GERD) adalah kondisi patologis atau gangguan pencernaan kronis di mana asam lambung dan isi lambung naik kembali ke esofagus (kerongkongan). Hal ini terjadi akibat melemahnya katup Lower Esophageal Sphincter (LES). Kondisi ini menimbulkan gejala khas seperti rasa panas atau terbakar di dada (heartburn), regurgitasi, nyeri dada yang kadang mirip serangan jantung, hingga batuk kronis dan ketidaknyamanan saat malam hari.",
-        "saran": "Pengobatan GERD dapat dilakukan dengan terapi farmakologis, di mana penggunaan obat golongan Proton Pump Inhibitor (PPI) sering dijadikan sebagai terapi lini pertama. Karena gejalanya bisa menyerupai penyakit jantung, sangat penting untuk berkonsultasi dengan dokter. Selain itu, perbaiki pola tidur karena gangguan tidur dan GERD memiliki hubungan dua arah yang saling memperparah.",
-        "pencegahan": "Kunci utama pencegahannya adalah modifikasi gaya hidup. Jaga berat badan ideal atau indeks massa tubuh (BMI) normal. Hindari faktor pemicu seperti makanan pedas, berlemak, kafein, dan alkohol. Berhenti merokok, kelola tingkat stres dengan baik, serta hindari langsung berbaring setelah makan.",
-        "referensi": "[1] Sangging, P. R. A., dkk. (2025). Penyakit GERD. MEDIC NUTRICIA: Jurnal Ilmu Kesehatan, Vol. 16 No. 2.\n[2] Putri, A. K. Z., dkk. (2023). Modifikasi Gaya Hidup Dan Kajian Pengobatan Pada Penderita Gastroesophageal Reflux Disease (GERD). Scientific Journal of Nursing.\n[3] Rahmadani, T. S., dkk. (2026). Hubungan Dua Arah Antara Gastroesophageal Reflux Disease dengan Gangguan Tidur. Medula, Vol. 16, No. 1.\n[4] Indriastuti, D., dkk. (2024). Penyuluhan Kesehatan Mengenai Pengenalan Gangguan Kesehatan Pencernaan: Gastroesophageal Reflux Disease (GERD) Dan Penanganannya. Karya Kesehatan Journal of Community Engagement, Vol. 05, No. 02.\n[5] Kuncoro, D., dkk. (2024). Jaringan Syaraf Tiruan Memprediksi Penyakit Gerd. Bridge: Jurnal Publikasi Sistem Informasi dan Telekomunikasi, Vol. 2 No. 4."
+    "Refluks (GERD)": {
+        "deskripsi": "Gastroesophageal Reflux Disease (GERD) adalah kondisi dimana asam lambung naik kembali ke esofagus, menimbulkan sensasi terbakar pada dada.",
+        "saran": "Hindari berbaring setelah makan, makan dalam porsi kecil namun sering, dan gunakan bantal yang lebih tinggi saat tidur.",
+        "pencegahan": "Kurangi makanan asam, pedas, dan berlemak, serta kelola berat badan ideal.",
+        "referensi": "[1] V. A. Laita, dkk. (2025). Sistem Pakar Diagnosa Penyakit Pencernaan... 4TH MDP STUDENT CONF."
     },
-    
-    "Gastritis": {
-        "deskripsi": "Gastritis adalah penyakit lambung yang terjadi akibat peradangan atau pembengkakan pada area mukosa lambung yang memicu kenaikan asam lambung. Gejalanya biasanya berupa rasa tidak nyaman pada perut bagian atas (ulu hati), mual, muntah, hingga sakit kepala dan menurunnya nafsu makan.",
-        "saran": "Atur pola makan yang baik dan kelola stres dengan bijak, karena stres yang tinggi dapat memicu kekambuhan gastritis. Jika melakukan pengobatan secara mandiri (swamedikasi) untuk meredakan gejala, pastikan menggunakan obat yang tepat sesuai anjuran medis agar tidak memperparah kondisi lambung.",
-        "pencegahan": "Pencegahan utama adalah dengan menjaga keteraturan jam makan dan tidak menunda waktu makan. Hindari kebiasaan mengonsumsi makanan yang merangsang asam lambung secara berlebihan, seperti makanan yang terlalu pedas, asam, serta terapkan gaya hidup yang sehat.",
-        "referensi": "[1] Pratama, P. H., dkk. (2022). Pengaruh Perbedaan Pola Makan Terhadap Penyebab Penyakit Gastritis Pada Remaja.\n[2] Pusfitasari, N., dkk. (2024). Types Of Food That Cause Gastritis. HN HealthCare Nursing Journal, Vol. 6 No. 2.\n[3] Zuhair, R. D., dkk. (2023). Hubungan Antara Pola Makan Dan Stres Terhadap Kejadian Penyakit Gastritis. Cendekia Utama, Vol. 12 No. 2.\n[4] Octasari, P. M., & Shinta, F. D. (2022). Gambaran Tingkat Pengetahuan Dan Perilaku Masyarakat Terhadap Swamedikasi Penyakit Gastritis. Jurnal Ilmiah Manuntung, 8(2)."
+    "Infeksi Saluran Pencernaan (Colera)": {
+        "deskripsi": "Kolera merupakan penyakit diare akut yang sangat menular, disebabkan oleh infeksi bakteri usus Vibrio cholerae. Ditandai dengan diare hebat cair.",
+        "saran": "Rehidrasi agresif dengan cairan oralit atau cairan infus sangat diperlukan secara segera.",
+        "pencegahan": "Pastikan air minum dan makanan selalu dimasak hingga matang, dan jaga kebersihan sanitasi lingkungan.",
+        "referensi": "[1] V. A. Laita, dkk. (2025). Sistem Pakar Diagnosa Penyakit Pencernaan... 4TH MDP STUDENT CONF."
     },
-    
-    "Apendisitis": {
-        "deskripsi": "Apendisitis secara umum adalah peradangan akibat infeksi pada usus buntu atau umbai cacing (apendiks). Gejala penyakit usus buntu umumnya berupa nyeri pada perut kanan bawah, demam, hingga mual dan muntah. Dari berbagai penelitian yang telah dilakukan, obstruksi merupakan penyebab yang dominan dan merupakan pencetus untuk terjadinya apendisitis.",
-        "saran": "Jika sudah terjadi peradangan, tindakan yang biasanya dilakukan adalah dengan operasi pengangkatan usus buntu. Setelah operasi, pasien perlu melakukan penyesuaian pola makan sebelum kembali ke pola makan normal. Semakin positif sikap pasien dalam menghadapi pengelolaan apendisitis, maka semakin baik praktik pasien dalam mencegah komplikasi lebih serius.",
-        "pencegahan": "Hindari faktor risiko potensial seperti diet rendah serat dan tinggi gula. Sangat penting untuk mengkonsumsi makanan yang mengandung serat secara rutin agar mudah dicerna oleh sistem pencernaan, serta menghindari makanan yang terlalu pedas.",
-        "referensi": "[1] Apriliani, E., Zaini, S., & Kapadia, R. (2022). Hubungan Tingkat Pengetahuan Terhadap Kepatuhan Diit Pada Pasien Apendisitis di Poli Bedah RSUD dr. Abdul Azis Singkawang Tahun 2019. Scientific Journal of Nursing Research, Vol 4 No 2, hlm. 63-67.\n[2] Pratama, Y., dkk. (2021). Aspek Klinis dan Tatalaksana Apendisitis Akut pada Anak. Jurnal Kedokteran Nanggroe Medika, 4(2).\n[3] Sani, N., dkk. (2020). Karakteristik Pasien Apendisitis Akut di Rumah Sakit Umum Daerah Dr. H. Abdul Moeloek Provinsi Lampung. Jurnal Ilmu Keperawatan Malahayati, 2(4).\n[4] Hartawan, I. G. N., dkk. (2020). Karakteristik Kasus Apendisitis Di Rumah Sakit Umum Pusat Sanglah Denpasar Bali. E-Jurnal Medika Udayana, 9(10)."
+    "Maag (Dispepsia)": {
+        "deskripsi": "Dispepsia merujuk pada rasa tidak nyaman pada perut bagian atas. Bisa disebabkan oleh radang lambung atau gaya hidup.",
+        "saran": "Kelola stres dan gunakan obat pereda asam lambung jika gejala mengganggu.",
+        "pencegahan": "Atur pola makan agar lebih teratur dan tidak menunda makan.",
+        "referensi": "[1] V. A. Laita, dkk. (2025). Sistem Pakar Diagnosa Penyakit Pencernaan... 4TH MDP STUDENT CONF."
     },
-
-    "Disentri": {
-        "deskripsi": "Disentri adalah infeksi yang menimbulkan luka dan tukak yang terbatas pada kolon (usus besar). Penyakit ini ditandai dengan gejala khas yang dikenal sebagai sindrom disentri, yaitu sakit perut yang sering disertai tenesmus (rasa tidak tuntas/nyeri saat BAB), serta tinja yang mengandung darah dan lendir yang umumnya berasal dari bakteri seperti Shigella dysenteriae.",
-        "saran": "Pengobatan utama untuk disentri adalah dengan penggunaan antibiotik untuk membunuh bakteri penyebabnya. Namun, sangat penting untuk berkonsultasi dengan dokter karena penggunaan jenis antibiotik, dosis, dan interval yang tidak tepat dapat menyebabkan kekambuhan (relaps), resistensi kuman, hingga masalah efek samping.",
-        "pencegahan": "Bakteri penyebab disentri sangat mudah ditularkan melalui jalur feses-oral atau melalui konsumsi makanan dan air yang terkontaminasi. Jaga kebersihan diri dan lingkungan secara ketat. Khusus untuk balita dan anak-anak, pastikan asupan gizi yang baik dan pemberian ASI eksklusif untuk memperkuat daya tahan tubuh agar tidak rentan terhadap bakteri.",
-        "referensi": "[1] Saputri, G. A. R., dkk. (2023). Penyuluhan Kenali Gejala Dan Cara Penanganan Disentri Pada Sekolah Di SMA Negeri 17 Bandar Lampung. Jurnal Pengabdian Farmasi Malahayati, Vol. 6 No.1.\n[2] Irawan, J., dkk. (2021). Disentri Basiler. Jurnal Medula, Volume 11, Nomor 3.\n[3] Monikawati, T., dkk. Hubungan Ketepatan Penggunaan Antibiotik Dengan Kekambuhan Disentri Pada Pasien Rawat Jalan.\n[4] Kantona, E., dkk. (2024). Faktor Penyebab Kejadian Anak Disentri. Plenary Health: Jurnal Kesehatan Paripurna, Vol. 1 Issue 1."
+    "Radang Hati (Hepatitis)": {
+        "deskripsi": "Hepatitis adalah peradangan pada organ hati, umumnya akibat infeksi virus, yang menyebabkan kulit tampak kuning (jaundice).",
+        "saran": "Perlu istirahat total, diet yang mendukung fungsi hati, dan berkonsultasi dengan ahli penyakit dalam.",
+        "pencegahan": "Dapatkan vaksinasi (A dan B) dan selalu menjaga higiene alat makan serta lingkungan.",
+        "referensi": "[1] V. A. Laita, dkk. (2025). Sistem Pakar Diagnosa Penyakit Pencernaan... 4TH MDP STUDENT CONF."
     },
-    
-    "Diare": {
-        "deskripsi": "Diare didefinisikan sebagai feses (BAB) yang konsistensinya lunak hingga cair dan terjadi lebih dari tiga kali per hari. Kondisi ini ditandai dengan frekuensi dan konsistensi tinja yang tidak normal. Cara penularan diare pada umumnya melalui cara fekal oral yaitu melalui makanan atau minuman yang tercemar, atau kontak langsung tangan yang telah tercemar tinja penderita.",
-        "saran": "Terapi rehidrasi merupakan aspek penting dari pengelolaan setiap pasien dengan diare. Sebagian besar bersifat self limiting sehingga hanya perlu diperhatikan keseimbangan cairan dan elektrolit. Dalam kasus diare akut ringan, istirahat, hidrasi yang cukup, dan makanan yang mudah dicerna sering cukup untuk memulihkan diri. Jika diare berlangsung lebih dari beberapa hari atau disertai gejala yang parah, penting untuk mencari perawatan medis.",
-        "pencegahan": "Pencegahan utama adalah menerapkan Perilaku Hidup Bersih dan Sehat (PHBS). Sangat penting untuk mencuci tangan pakai sabun terutama sebelum makan, sesudah makan, dan sesudah buang air. Gunakan air bersih yang terlindung dari kontaminasi dan konsumsi air yang aman. Hindari makanan yang berisiko menyebabkan diare, seperti makanan mentah atau setengah matang.",
-        "referensi": "[1] Eldysta, E., dkk. (2022). Hubungan Perilaku Cuci Tangan Dan Faktor Risiko Lingkungan Terhadap Kejadian Penyakit Diare. Public Health and Safety International Journal, Vol. 2, No. 2.\n[2] Aisyah, I. S. (2024). Analisis Hubungan Antara Praktik Higienis dan Kejadian Penyakit Diare: Kasus Dusun Jagabaya. Jurnal Kesehatan dan Kebidanan Nusantara, Vol. 2, No. 1.\n[3] Siregar, P. A., dkk. (2023). Epidemiologi Penyakit Diare. JK: Jurnal Kesehatan, Vol. 1, No. 1.\n[4] Iqbal, A. F., dkk. (2022). Pengaruh Perilaku Hidup Bersih Dan Sehat Terhadap Kejadian Diare Pada Anak Sekolah. Jurnal Medical Profession (MedPro), Vol. 4, No. 3."
+    "Radang Usus Buntu (Apendisitis)": {
+        "deskripsi": "Apendisitis adalah peradangan akibat infeksi pada umbai cacing (usus buntu).",
+        "saran": "Tindakan operatif (apendiktomi) adalah solusi utama. Konsultasikan segera dengan bedah darurat.",
+        "pencegahan": "Tingkatkan konsumsi makanan berserat untuk mencegah penyumbatan usus buntu.",
+        "referensi": "[1] V. A. Laita, dkk. (2025). Sistem Pakar Diagnosa Penyakit Pencernaan... 4TH MDP STUDENT CONF."
+    },
+    "Gangguan Pencernaan (Disentry)": {
+        "deskripsi": "Disentri adalah infeksi usus yang mengakibatkan diare parah disertai darah atau lendir pada tinja.",
+        "saran": "Antibiotik yang tepat sangat dibutuhkan, ditambah dengan penggantian cairan tubuh.",
+        "pencegahan": "Selalu mencuci tangan menggunakan sabun sebelum dan sesudah makan maupun buang air.",
+        "referensi": "[1] V. A. Laita, dkk. (2025). Sistem Pakar Diagnosa Penyakit Pencernaan... 4TH MDP STUDENT CONF."
     }
 }

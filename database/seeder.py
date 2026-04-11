@@ -4,7 +4,6 @@ import os
 import mysql.connector
 from dotenv import load_dotenv
 
-# Menambahkan path folder utama agar bisa membaca file pakar_rules.py & penyakit.py
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from penyakit import info_penyakit
@@ -16,7 +15,6 @@ def seed_database():
     print("Memulai proses Seeding Database...")
     
     try:
-        # Buka koneksi ke database
         conn = mysql.connector.connect(
             host=os.getenv("DB_HOST", "localhost"),
             user=os.getenv("DB_USER", "root"),
@@ -25,34 +23,38 @@ def seed_database():
         )
         cursor = conn.cursor()
 
-        # Mapping Kode Penyakit agar sesuai urutan (P01 - P05)
+        # Mapping Kode Penyakit yang 100% sama dengan pakar_rules.py
         penyakit_kode = {
-            "GERD": "P01",
-            "Gastritis": "P02",
-            "Apendisitis": "P03",
-            "Disentri": "P04",
-            "Diare": "P05"
+            "Refluks (GERD)": "P01",
+            "Infeksi Saluran Pencernaan (Colera)": "P02",
+            "Maag (Dispepsia)": "P03",
+            "Radang Hati (Hepatitis)": "P04",
+            "Radang Usus Buntu (Apendisitis)": "P05",
+            "Gangguan Pencernaan (Disentry)": "P06"
         }
 
-        # --- 1. SEED TABEL PENYAKIT ---
-        # Menggunakan INSERT ON DUPLICATE KEY UPDATE agar data lama tertimpa dengan otomatis
+        # --- 1. SEED TABEL PENYAKIT (Force Update Nama) ---
         sql_penyakit = """
             INSERT INTO penyakit (kode_penyakit, nama_penyakit, deskripsi, saran, pencegahan, referensi) 
             VALUES (%s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE 
-            deskripsi=VALUES(deskripsi), saran=VALUES(saran), pencegahan=VALUES(pencegahan), referensi=VALUES(referensi)
+            nama_penyakit=VALUES(nama_penyakit),
+            deskripsi=VALUES(deskripsi), 
+            saran=VALUES(saran), 
+            pencegahan=VALUES(pencegahan), 
+            referensi=VALUES(referensi)
         """
-        
-        # Looping membaca format dictionary dari file penyakit.py
         for nama, detail in info_penyakit.items():
             kode = penyakit_kode.get(nama)
             val = (kode, nama, detail['deskripsi'], detail['saran'], detail['pencegahan'], detail['referensi'])
             cursor.execute(sql_penyakit, val)
-            
         print("✔️ Data Penyakit & Referensi Jurnal berhasil di-seed!")
 
-        # --- 2. SEED TABEL GEJALA ---
-        sql_gejala = "INSERT IGNORE INTO gejala (kode_gejala, nama_gejala) VALUES (%s, %s)"
+        # --- 2. SEED TABEL GEJALA (Force Update Gejala) ---
+        sql_gejala = """
+            INSERT INTO gejala (kode_gejala, nama_gejala) VALUES (%s, %s)
+            ON DUPLICATE KEY UPDATE nama_gejala=VALUES(nama_gejala)
+        """
         for kode, nama in daftar_gejala.items():
             cursor.execute(sql_gejala, (kode, nama))
         print("✔️ Data Gejala berhasil di-seed!")
@@ -65,7 +67,6 @@ def seed_database():
                 cursor.execute(sql_rules, (kode_penyakit, kode_gejala, nilai_cf))
         print("✔️ Data Rules (Bobot Pakar) berhasil di-seed!")
 
-        # Simpan perubahan permanen ke database
         conn.commit()
         print("🎉 SEEDING SUKSES! Database kamu sudah sinkron dengan data terbaru.")
 
