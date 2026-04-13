@@ -34,11 +34,11 @@ daftar_gejala = {
 }
 
 rules_cf = {
-    "Refluks(GERD)": {
+    "Refluks (GERD)": {
         "G01": 0.40, "G22": 0.40, "G12": 0.80, "G04": 0.70, 
         "G19": 0.60, "G06": 0.50
     },
-    "Infeksi SaluranPencernaan (Colera)": {
+    "Infeksi Saluran Pencernaan (Colera)": {
         "G01": 0.40, "G22": 0.40, "G03": 0.50, "G29": 0.80, 
         "G14": 0.40, "G09": 0.70, "G16": 0.85, "G13": 0.50, "G20": 0.60
     },
